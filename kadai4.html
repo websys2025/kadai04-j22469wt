@@ -68,18 +68,34 @@
             const btn = new Array(items.length);
 
             // 課題4-1. ここにコード書く
-            // 商品オブジェクトの生成
+            for (let i = 0; i < items.length; i++) {
+            item_list[i] = new Item(items[i].name, items[i].price, items[i].stock);
+        }// 商品オブジェクトの生成
 
             // 課題4-2. ここにコードを書く
-            // 商品表の作成
+            for (let i = 0; i < item_list.length; i++) {
+            const row = itemAreaBody.insertRow();
+            const nameCell = row.insertCell();
+            const priceCell = row.insertCell();
+            const stockCell = row.insertCell();
+            const purchaseCell = row.insertCell();
+
+            nameCell.textContent = item_list[i].name;
+            priceCell.textContent = item_list[i].price;
+            stockCell.textContent = item_list[i].stock;
+            stockCell.id = `stock_${item_list[i].id}`;
+
+            const button = document.createElement("button");
+            button.textContent = "購入";
+            button.id = `button${item_list[i].id}`;
+            purchaseCell.appendChild(button);// 商品表の作成
 
             // クリックイベント時の購入処理の設定
             for (let i=0; i<item_list.length; i++) {
                 // 課題4-3. ここにコードを書く
-                // 課題4-1, 4-2のコードが完成したら、以下のコメントを外す
-                //document.getElementById("button"+item_list[i].id).onclick = () => {
-                //    item_list[i].buyItem();
-                //}
+            button.onclick = () => {
+                item_list[i].buyItem();
+                }
             }
             Item.showItemList(item_list);
 
